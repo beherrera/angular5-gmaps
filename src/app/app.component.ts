@@ -48,6 +48,9 @@ export class AppComponent {
   drawRoute;
   origen;
   final;
+  x ;
+ duration_ = 0;
+
 
   myLatLng;
   centrarmap = {lat:6.231928, lng:-75.60116719999996}
@@ -105,7 +108,7 @@ intervalo:any;
 
   
   showProduct(product:Product){
-    
+    this.x = 0;
         this.ListDirs = [
          
     { lat:6.250270954618633, lng: -75.56842998998036, date: "2015-06-17 14:10:36" },
@@ -176,11 +179,6 @@ intervalo:any;
             directionsDisplay.setDirections(response);
           }
         });
-       
-
-
-
-
 
 
 this.apper();
@@ -203,11 +201,6 @@ this.apper();
 
   }
 
-  x = 0;
- duration_ = 0;
- 
-
-
 //recorre el json de lat long y fecha
  apper(){
    var interval;
@@ -220,7 +213,7 @@ this.apper();
         //console.log(mins.toString()); 
         //console.log(secuencia);     
 
-   this.duration_ += 1000;
+   //this.duration_ += 1000;
 
   interval = setInterval(()=> { 
               
