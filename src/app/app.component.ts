@@ -52,7 +52,7 @@ export class AppComponent {
   myLatLng;
   centrarmap = {lat:6.231928, lng:-75.60116719999996}
   
-
+intervalo:any;
   ListDirs: any[];
   products:any[];
   latLng:any;
@@ -178,26 +178,34 @@ export class AppComponent {
         });
        
 
+var intervalo = 1000;
+
+
+//recorre el json de direcciones
 var i = 0;
 setInterval(()=> {
 
-
-      console.log( i.toString());
-
-                  let data = this.ListDirs[i],  
-                  latLng = new google.maps.LatLng(data.lat, data.lng); 
-        
-              // Creating a marker and putting it on the map
-              let marker = new google.maps.Marker({
-                position: latLng,
-                map: this.map,
-                title: ''
-              });
-      i++;  
-}, 1000);
-    //recorre el json de direcciones
+  if(i!=this.ListDirs.length){
 
 
+                    let data = this.ListDirs[i],  
+                    latLng = new google.maps.LatLng(data.lat, data.lng); 
+          
+                // Creating a marker and putting it on the map
+                let marker = new google.maps.Marker({
+                  position: latLng,
+                  map: this.map,
+                  title: ''
+                });
+        i++;  
+
+  }
+
+      
+}, intervalo);
+    
+
+this.apper();
 
 //for (var i = 0, length = this.ListDirs.length; i < length; i++) {}
        
@@ -215,12 +223,45 @@ setInterval(()=> {
           
 
 
-       // var now = moment(new Date()); //todays date
-       // var end = moment("2018-06-1"); // another date
-       // var duration = moment.duration(now.diff(end));
-       // var days = duration.asMinutes();
-       // console.log(days)
-
-
   }
+
+  x = 0;
+ duration_ = 0;
+ limit = 10;
+
+ apper(){
+   var interval;
+
+          var now = moment("2015-06-17 14:27:36"); //todays date
+         var end = moment("2015-06-17 14:24:36"); // another date
+         var duration = moment.duration(now.diff(end));
+         var mins = duration.asMinutes();
+        var secuencia = mins*1000;
+        //console.log(mins.toString()); 
+        //console.log(secuencia);     
+
+   this.duration_ += 1000;
+
+  interval = setInterval(()=> { 
+              
+              clearInterval(interval);
+              if(this.x<this.limit){
+                this.apper();
+
+              }else{
+                 this.x = -1;
+              }
+              
+             }, secuencia);   
+
+                console.log(this.x.toString());
+
+   this.x ++;
+
+ }
+
+
+
+
+
 }
