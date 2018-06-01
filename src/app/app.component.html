@@ -12,7 +12,7 @@
         <!-- Grey navigation panel -->
 
         <div class="collection" *ngFor=" let product of products">
-          <button (click)="showProduct(product)">{{product.name}}</button> 
+          <button class="btn waves-effect waves-light" (click)="showProduct(product)">{{product.name}}</button> 
           
        
         </div><br>
@@ -31,7 +31,7 @@
       
       <div class="col s9" *ngIf="show">
         <!-- Teal page content  -->
-        <h4>Detalles de la Orden</h4>
+        <h5>Detalles de la Orden</h5>
 		    <h5>Name: {{product.name}}</h5>
         <p><strong>ID: </strong>{{product.id}} </p>
         <p><strong>Categoria: </strong>{{product.category.name}} </p>

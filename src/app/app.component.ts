@@ -48,12 +48,14 @@ export class AppComponent {
   drawRoute;
   origen;
   final;
+
   myLatLng;
   centrarmap = {lat:6.231928, lng:-75.60116719999996}
   
 
   ListDirs: any[];
   products:any[];
+  latLng:any;
   urlApi:string="http://13.90.130.197/product";
   show:boolean = false;
 
@@ -88,28 +90,16 @@ export class AppComponent {
 
 
   getProduct(){
-       
-              
+                     
       let token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJncml0aWNvc3VhdmVAZ21haWwuY29tIiwiZXhwIjoxNTI4NTg4ODA3fQ.7KFnvgqbGFLv0YP69Q6gCvcLsRE7pQR5PuuN0ti50Sc1rThASdWxsoASIzrAMNL1dStNaIs2DFpc4fKYFNigHg';  
       let headers = new Headers({'Authorization':`Bearer ${token}`,'Content-Type':'application/json','Accept': 'application/json'});
 
-
-
       return this.http.get(this.urlApi,{headers:headers})
          .map(res=>{
-                 console.log(res); 
+               
                 this.products = res.json();
-
-                
              }).subscribe(res=>{
-
-
            }); 
-
-      
-
-      //return this.http.get(this.urlApi,{headers:headers})
-            
     }
 
 
@@ -118,7 +108,6 @@ export class AppComponent {
     
         this.ListDirs = [
          
-    { lat:6.25013066515123, lng:-75.56849387538932 },
     { lat:6.250270954618633, lng: -75.56842998998036},
     { lat:6.250429907901519, lng: -75.56837951561647},
     { lat:6.250564864760729, lng:-75.56842828298613 },
@@ -177,7 +166,8 @@ export class AppComponent {
        this.drawRoute = {
          origin: this.origen,
          destination: this.final,
-         travelMode: 'DRIVING'
+         travelMode: 'DRIVING',
+         unitSystem: google.maps.UnitSystem.METRIC
         }
       
         directionsService.route(this.drawRoute, function(response, status) {
@@ -187,11 +177,14 @@ export class AppComponent {
           }
         });
        
-     
-    //recorre el json de direcciones
-for (var i = 0, length = this.ListDirs.length; i < length; i++) {
-          
-                let data = this.ListDirs[i],
+
+var i = 0;
+setInterval(()=> {
+
+
+      console.log( i.toString());
+
+                  let data = this.ListDirs[i],  
                   latLng = new google.maps.LatLng(data.lat, data.lng); 
         
               // Creating a marker and putting it on the map
@@ -200,15 +193,13 @@ for (var i = 0, length = this.ListDirs.length; i < length; i++) {
                 map: this.map,
                 title: ''
               });
-            
-          }
-
-         
-    
+      i++;  
+}, 1000);
+    //recorre el json de direcciones
 
 
-     
 
+//for (var i = 0, length = this.ListDirs.length; i < length; i++) {}
        
         this.product= {
        name: product.name,
@@ -222,19 +213,13 @@ for (var i = 0, length = this.ListDirs.length; i < length; i++) {
        volume:product.volume,
     };
           
-   
-     
 
-    
 
        // var now = moment(new Date()); //todays date
        // var end = moment("2018-06-1"); // another date
        // var duration = moment.duration(now.diff(end));
        // var days = duration.asMinutes();
-       //S console.log(days)
-
-
-
+       // console.log(days)
 
 
   }
