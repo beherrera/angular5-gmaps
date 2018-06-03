@@ -10,12 +10,9 @@
 
       <div class="col s2"><h3>Ordenes</h3>
         <!-- Grey navigation panel -->
-
         <div class="collection" *ngFor=" let product of products">
-          <button class="btn waves-effect waves-light" (click)="showProduct(product);">{{product.name}}</button> 
-          
-       
-        </div><br>
+          <a class="collection-item" (click)="showProduct(product);">{{product.name}}</a> 
+        </div>
       </div>
 		  
 
@@ -31,8 +28,8 @@
       
       <div class="col s9" *ngIf="show">
         <!-- Teal page content  -->
-        <h5>Detalles de la Orden</h5>
-		    <h5>Name: {{product.name}}</h5>
+        <h6>Detalles de la Orden</h6>
+		    <p><strong>Name: </strong>{{product.name}}</p>
         <p><strong>ID: </strong>{{product.id}} </p>
         <p><strong>Categoria: </strong>{{product.category.name}} </p>
         <p><strong>Dir: </strong>{{final.lat}}-{{final.lng}}</p>
